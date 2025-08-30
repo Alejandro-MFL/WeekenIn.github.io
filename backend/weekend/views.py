@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 
 # api_view indica que solo acepta metodo POST, es la funcion encargada de registrar un nuevo usuario
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def register(request):
     # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
     username = request.data.get("username")

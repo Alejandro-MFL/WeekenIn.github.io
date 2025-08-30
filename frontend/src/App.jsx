@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
+import RegisterPage from "./pages/Register/Register";
 
 function Home() {
   return <h1>WekeendIn — Home</h1>;
@@ -11,16 +12,11 @@ function About() {
 export default function App() {
   return (
     <HashRouter>
-        <nav style={{ display: "flex", gap: 12, padding: 12 }}>
-          <Link to="/">Home</Link>
-          <Link to="/about">Acerca</Link>
-        </nav>
-
+      <nav><Link to="/register">Registro</Link></nav>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </HashRouter>
+            <Route path="/register" element={<RegisterPage />} /> 
+          </Routes>
+    </HashRouter>
   );
 }
 
