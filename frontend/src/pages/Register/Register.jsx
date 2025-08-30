@@ -12,8 +12,7 @@ export default function RegisterPage() {
         try {
             // crea usuario
             await register(user, password);                   // crea usuario
-            const tokens = await login(user, password);        // consigue tokens y los guarda en sessionStorage
-            console.log("tokens:", tokens); // debería ver {access, refresh}
+            const tokens = await login(user, password);        // consigue tokens y los guarda en sessionStorage            
             sessionStorage.setItem("access", tokens.access);
             sessionStorage.setItem("refresh", tokens.refresh);
             const yo = await me();              // prueba /api/me con Authorization: Bearer
