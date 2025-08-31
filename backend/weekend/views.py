@@ -1,8 +1,17 @@
+from calendar import monthrange
+from datetime import timedelta,date
 from django.contrib.auth.models import User
+from django.utils import timezone
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework import status, generics, permissions
+from .models import Weekend, Plan, Day
+from .serializer import PlanSerializer
+
+
+
 
 # api_view indica que solo acepta metodo POST, es la funcion encargada de registrar un nuevo usuario
 @api_view(["POST"])
@@ -26,3 +35,55 @@ def register(request):
 def me(request):
     user = request.user
     return Response({"id": user.id, "username": user.username}) 
+
+class SummaryView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        today = timezone.localdate()
+        # tu modelo tiene friday; buscamos el siguiente >= hoy-4 (misma semana) u otro próximo
+        next_we = (Weekend.objects
+                   .filter(user=request.user, friday__gte=today - timedelta(days=4))
+                   .order_by("friday")
+                   .first())
+        if not next_we:
+            return Response({"next_weekend": None, "days_to_weekend": None})
+
+        days_to = (next_we.friday - timedelta(days=4)) - today  # lunes de esa semana - hoy
+        return Response({
+            "next_weekend": {
+                "friday": next_we.friday,
+                "start_date": next_we.start_date,  # propiedad
+                "end_date": next_we.end_date,      # propiedad
+            },
+            "days_to_weekend": max(days_to.days, 0)
+        })
+    
+
+class MyPlansList(generics.ListAPIView):
+    serializer_class = PlanSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        qs = Plan.objects.filter(user=self.request.user).order_by("-created_at")
+        limit = int(self.request.query_params.get("limit", 10))
+        return qs[:limit]
+
+
+class MonthDaysView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        y = int(request.query_params.get("year"))
+        m = int(request.query_params.get("month"))
+        first = date(y, m, 1)
+        last = date(y, m, monthrange(y, m)[1])
+
+        days = (Day.objects
+                  .filter(weekend__user=request.user, date__range=[first, last])
+                  .order_by("date")
+                  .values("id","date"))
+
+        # Devolvemos un mapa YYYY-MM-DD -> day_id
+        by_date = { d["date"].isoformat(): d["id"] for d in days }        
+        return Response({"year": y, "month": m, "days": by_date})

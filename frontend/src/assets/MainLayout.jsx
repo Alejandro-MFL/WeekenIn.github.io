@@ -18,14 +18,15 @@ export default function MainLayout() {
   return (
     <div>
         <header className="site-header">
-            <nav className="nav">           
+            <nav className="nav">          
+            <div className="spacer" /> 
             <button onClick={goHome}>Home</button>
             <div className="spacer" />
+            <p id="fo">WeekendIn</p>
+            <div className="spacer" />
             <button onClick={Logout}>Logout</button>
-           
-            </nav>
-        
-            
+            <div className="spacer" />           
+            </nav>                    
         </header>
 
         <main style={{ padding: "1rem" }}>
