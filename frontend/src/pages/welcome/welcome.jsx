@@ -4,24 +4,17 @@ import Card from "../../components/Card";
 export default function Home(){
   return (
     <>
-      <div style={{display:"flex",gap:16,alignItems:"flex-start",marginBottom:16}}>
-        <img src="/avatar.png" alt="avatar" width="120" height="120" style={{borderRadius:24, boxShadow:"var(--shadow)"}}/>
-        <Card>
-          <p style={{fontSize:18, lineHeight:1.4}}>
-            Bloque A
-          </p>
-        </Card>
-      </div>
+      
 
       <div className="grid">
-        <div className="col-6"><Card title="Freelancer" subtitle="Logo/Brand Designer · 2021 — ahora">
+        <div className="col-4"><Card title="¿Días para Weekend?">
           <ul>
             <li>Bloque B</li>
             <li>Con columnas</li>
           </ul>
         </Card></div>
 
-        <div className="col-6"><Card title="Meetzed" subtitle="Graphic Designer · 2020 — 2021">
+        <div className="col-8"><Card title="Meetzed" subtitle="Graphic Designer · 2020 — 2021">
           <ul>
             <li>bloque C</li>
             <li>con columnas</li>

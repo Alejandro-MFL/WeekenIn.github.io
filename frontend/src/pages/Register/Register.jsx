@@ -1,5 +1,6 @@
 import React from "react";
 import { register, login, me } from "../../features/auth/api";
+import Card from "../../components/Card";
 
 export default function RegisterPage() {
         
@@ -23,11 +24,45 @@ export default function RegisterPage() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <input value={user} onChange={e=>setUser(e.target.value)} placeholder="usuario" />
-            <input value={password} onChange={e=>setPassword(e.target.value)} type="password" placeholder="contraseña" />
-            <button>Registrarme</button>
-            <pre>{out}</pre>
-        </form>
-    );
+        <>
+          
+    
+          <div className="grid">
+            <div className="col-8"><Card>
+                <h1>Aprovecha tus fines de semana</h1>
+                <h3>Con la mejor web para organizar tus fines de semana</h3>
+                <ul>
+                    <li>Apunta los planes que siempre quisiste hacer</li>
+                    <li>Gestiona tus dias libres, puentes vacaciones...</li>
+                    <li>Organizate según el clima y el tiempo que tengas</li>
+                </ul>
+                <h2>Y disfruta de tu finde semana con WeekendIn!</h2>                
+            </Card></div>
+
+            <div className="col-4"><Card title="Registrate">
+                <form onSubmit={onSubmit}>
+                     <span className="card" style={{padding:"6px 10px"}}>
+                        <input value={user} onChange={e=>setUser(e.target.value)} placeholder="usuario" />
+                     </span>
+                    <span className="card" style={{padding:"6px 10px"}}>
+                        <input value={password} onChange={e=>setPassword(e.target.value)} type="password" placeholder="contraseña" />
+                    </span>
+                    <span className="card" style={{padding:"6px 10px" }}>
+                        <button>Registrarme</button>
+                    </span>
+                    
+                   
+                    
+                    <pre>{out}</pre>
+                </form> 
+            </Card></div>
+    
+    
+            <div className="col-12"><Card title="Web desarrollada por Alejandro M Fernández">
+              <h4>Web en desarrollo</h4>
+            </Card></div>
+          </div>
+        </>
+      );
+
 }

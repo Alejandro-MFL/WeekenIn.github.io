@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login, me } from "../../features/auth/api";
+import Card from "../../components/Card";
 
 export default function LoginPage() {
   const [user, setU] = React.useState("");
@@ -29,7 +30,7 @@ export default function LoginPage() {
       sessionStorage.setItem("access", tokens.access);
       sessionStorage.setItem("refresh", tokens.refresh);
       await me();                                           // verifica sesión
-      navigate("/");                                        // destino tras login
+      navigate("/Home");                                        // destino tras login
     } catch (err) {
       setError(parseError(err));
     } finally {
@@ -38,40 +39,46 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
-      <h1>Iniciar sesión</h1>
-      <form onSubmit={onSubmit} style={{display:"grid", gap:12}}>
-        <label>
-          Usuario
-          <input
-            value={user}
-            onChange={(e)=>setU(e.target.value)}
-            placeholder="tu usuario"
-            autoComplete="username"
-          />
-        </label>
-        <label>
-          Contraseña
-          <input
-            value={password}
-            onChange={(e)=>setP(e.target.value)}
-            type="password"
-            placeholder="tu contraseña"
-            autoComplete="current-password"
-          />
-        </label>
 
-        {error && <div style={{color:"crimson"}}>{error}</div>}
+      <div style={{maxWidth: 420, margin: "40px auto", padding: 16}}><Card >
+        <h1>Inicia sesión</h1>
+        <form onSubmit={onSubmit} style={{display:"grid", gap:12}}>
+          <label>
+            Usuario 
+            <span className="card" style={{padding:"6px 10px"}}>
+               <input
+                value={user}
+                onChange={(e)=>setU(e.target.value)}
+                placeholder="tu usuario"
+                autoComplete="username"
+              />
+              </span>            
+             
+          </label>
+          <label>
+            Contraseña 
+            <span className="card" style={{padding:"6px 10px"}}>
+              <input
+                value={password}
+                onChange={(e)=>setP(e.target.value)}
+                type="password"
+                placeholder="tu contraseña"
+                autoComplete="current-password"
+              />
+            </span>            
+          </label>
 
-        <button disabled={loading || !user || !password}>
-          {loading ? "Entrando..." : "Entrar"}
-        </button>
-      </form>
+          {error && <div style={{color:"crimson"}}>{error}</div>}
+
+          <button disabled={loading || !user || !password}>
+            {loading ? "Entrando..." : "Entrar"}
+          </button>
+        </form>
 
       <p style={{marginTop:12}}>
         ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
       </p>
-    </div>
+    </Card></div>
   );
 }
 
