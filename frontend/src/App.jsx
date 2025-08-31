@@ -1,14 +1,11 @@
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
+import "./styles/index.css";
 import LoginPage from "./pages/Login/login";
+import WelcomePage from "./pages/welcome/welcome"
+import MainLayout from "./assets/MainLayout";
 import RegisterPage from "./pages/Register/Register";
 
-function Home() {
-  return <h1>WekeendIn — Home</h1>;
-}
-function About() {
-  return <h1>Acerca de Alejandro M. Fernández</h1>;
-}
 
 export default function App() {
   return (
@@ -23,7 +20,9 @@ export default function App() {
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         {/* tu home/dashboard */}
-        <Route path="/" element={<h2>Home</h2>} />
+        <Route path="/" element={<MainLayout/>}>
+          <Route index element={<WelcomePage/>} outlet="main"/>
+        </Route>
       </Routes>      
     </HashRouter>
   );

@@ -44,7 +44,7 @@ export default function LoginPage() {
         <label>
           Usuario
           <input
-            value={u}
+            value={user}
             onChange={(e)=>setU(e.target.value)}
             placeholder="tu usuario"
             autoComplete="username"
@@ -53,7 +53,7 @@ export default function LoginPage() {
         <label>
           Contraseña
           <input
-            value={p}
+            value={password}
             onChange={(e)=>setP(e.target.value)}
             type="password"
             placeholder="tu contraseña"
@@ -63,7 +63,7 @@ export default function LoginPage() {
 
         {error && <div style={{color:"crimson"}}>{error}</div>}
 
-        <button disabled={loading || !u || !p}>
+        <button disabled={loading || !user || !password}>
           {loading ? "Entrando..." : "Entrar"}
         </button>
       </form>

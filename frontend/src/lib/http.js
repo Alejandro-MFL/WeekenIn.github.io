@@ -15,7 +15,6 @@ async function refreshToken() {
 }
 
 
-
 // Funcion base para llamar al back  pidiendo dos argumentos, el camino y un objeto de la peticion
 export async function http(path, options = {}) {
     const token = sessionStorage.getItem("access");    
@@ -28,7 +27,6 @@ export async function http(path, options = {}) {
       // si el token esta caducado lo renueva 
     if (respuesta.status === 401){
         const newToken = await refreshToken();
-        console.log(newToken);
         if (newToken) {
             headers.Authorization = `Bearer ${token}`;
             respuesta = await fetch(`${BACK_LOCALHOST}${path}`, { ...options, headers });
