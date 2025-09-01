@@ -76,7 +76,7 @@ export default function LoginPage() {
         </form>
 
       <p style={{marginTop:12}}>
-        ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+        ¿No tienes cuenta? <Link to="/">Regístrate</Link>
       </p>
     </Card></div>
   );

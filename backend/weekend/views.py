@@ -61,29 +61,40 @@ class SummaryView(APIView):
     
 
 class MyPlansList(generics.ListAPIView):
+    # Selecciona la serializacion(En rerializer.py) y quien tiene acceso
     serializer_class = PlanSerializer
     permission_classes = [permissions.IsAuthenticated]
-
+    # Define la query, solo planes dek usuario y el limite de envio
     def get_queryset(self):
         qs = Plan.objects.filter(user=self.request.user).order_by("-created_at")
         limit = int(self.request.query_params.get("limit", 10))
         return qs[:limit]
 
+class MyDaysWelcome(generics.ListAPIView):
+    # Selecciona la serializacion(En serializer.py) y quien tiene acceso
+    serializer_class = PlanSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-class MonthDaysView(APIView):
+    # Define la query, solo planes dek usuario y el limite de envio
+    def get_queryset(self):
+        qs = Day.objects.filter(user=self.request.user)
+        limit = int(self.request.query_params.get("limit", 10))
+        return qs[:limit]
+
+
+class MyDaysWelcome(generics.ListAPIView):
+    # Selecciona la serializacion(En serializer.py) y quien tiene acceso
+    serializer_class = PlanSerializer
     permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        y = int(request.query_params.get("year"))
-        m = int(request.query_params.get("month"))
-        first = date(y, m, 1)
-        last = date(y, m, monthrange(y, m)[1])
-
+    
+    def get(self, request):    
+        # Tomamos el dia de hoy, el primer dia de esta semana y el domingo de 5 semanas siguientes  
+        today = timezone.localdate()
+        firstDay = today - timedelta(days=today.weekday())
+        lastDay = firstDay + timedelta(days= 7 * 5 -1)
+        # Definimos la query con los datos que necesitamos enviar a welcome
         days = (Day.objects
-                  .filter(weekend__user=request.user, date__range=[first, last])
+                  .filter(weekend__user=request.user, date__range=[firstDay, lastDay])
                   .order_by("date")
-                  .values("id","date"))
-
-        # Devolvemos un mapa YYYY-MM-DD -> day_id
-        by_date = { d["date"].isoformat(): d["id"] for d in days }        
-        return Response({"year": y, "month": m, "days": by_date})
+        )            
+        return days

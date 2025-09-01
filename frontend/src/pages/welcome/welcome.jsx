@@ -22,6 +22,9 @@ export default function Home(){
             getPlans(10),
             getMonth(y, m),
             ]);
+            console.log(cal);
+            console.log(s);
+            console.log(p);
             setSummary(s);
             setPlans(p.results || p);   // por si usas paginación luego
             setCalendar(cal);
