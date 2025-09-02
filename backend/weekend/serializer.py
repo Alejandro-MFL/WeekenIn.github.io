@@ -11,7 +11,7 @@ class DayMiniSerializer(serializers.ModelSerializer):
         model = Day
         fields = ("id","date")  # minimal
 
-class DaySerializer(serializers.ModelSerializer):
+class DaysSerializer(serializers.ModelSerializer):
     class Meta:
         model = Day
         fields = ("id","date","desayuno", "mediodia", "comida", "tarde", "cena", "noche")  

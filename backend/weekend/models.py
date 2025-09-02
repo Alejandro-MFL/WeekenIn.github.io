@@ -54,7 +54,7 @@ class Weekend(models.Model):
         ordering = ["-friday"]
 
     def __str__(self):
-        return f"{ 'Weekend'}: {self.start_date:%d/%m/%Y}/{self.end_date:%d/%m/%Y}"
+        return f"{ 'Weekend'}: {self.start_date:%d/%m/%Y}-{self.end_date:%d/%m/%Y}"
 
     @property
     def start_date(self):

@@ -1,52 +1,66 @@
 import React from "react";
 import Card from "../../components/Card";
-import { getSummary, getPlans, getMonth } from "../../features/home/api";
+import { getPlans, getDays } from "../../features/home/api";
+import CalendarGrid from "../../components/CalendarGrid";
 
 
 
 
 export default function Home(){
-    const [summary, setSummary] = React.useState(null);
+    //Los valores de la cuenta de fin de semana
+    const [titleWeekend, setTitleWeekend] = React.useState("Cargando…");
+    const [toWeekend, setToWeekend] = React.useState("");
     const [plans, setPlans] = React.useState([]);
-    const [calendar, setCalendar] = React.useState(null);
+    const [days, setDays] = React.useState([]);
+    const [firstDay, setFirstDay] = React.useState("Cargando…");
+    
+    function toISO(d) {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
+    }
+    
 
     React.useEffect(() => {
-        const today = new Date();
-        const y = today.getFullYear();
-        const m = today.getMonth() + 1;
-
+        
+        let today = new Date();
+        let toWeek = 6 - today.getDay();
+        setFirstDay(toISO(today));        
+        if (today.getDay() < 5) 
+        {          
+         
+          setToWeekend(toWeek);
+          setTitleWeekend("Días para Weekend");        
+        }
+        else
+        {
+          setTitleWeekend("Ya estamos en Weekend");
+          setToWeekend("¿Qué quieres hacer hoy?");
+        }
+        
         (async () => {
         try {
-            const [s, p, cal] = await Promise.all([
-            getSummary(),
+            const [p, d] = await Promise.all([            
             getPlans(10),
-            getMonth(y, m),
+            getDays(),
             ]);
-            console.log(cal);
-            console.log(s);
-            console.log(p);
-            setSummary(s);
+
             setPlans(p.results || p);   // por si usas paginación luego
-            setCalendar(cal);
+            setDays(d);
+            console.log(d);
         } catch (e) {
             console.error(e);
         }
         })();
     }, []);
 
-
-
-
-
-
   return (
     <>          
         <div className="grid">
             {/*Dias para finde*/}
-            <div className="col-4"><Card title="¿Días para Weekend?">
-                {summary
-                ? <p> {summary.days_to_weekend ?? "—"}</p>
-                : <p>Cargando…</p>}
+            <div className="col-4"><Card title={titleWeekend} >
+                {<h2>{toWeekend}</h2>}
             </Card></div>
             {/*Planes*/}
             <div className="col-8"><Card title="Tus planes">
@@ -55,8 +69,12 @@ export default function Home(){
             </ul>
             </Card></div>
             {/*Calendario*/}
-            <div className="col-12"><Card title="Mes">
-             {/*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
+            <div className="col-12"><Card title="Mes">  
+              {console.log(days)}            
+             {<div className="col-4"><CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
+                {<h2>{toWeekend}</h2>}                
+              </CalendarGrid></div>
+             /*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
             </Card></div>
 
         </div>
