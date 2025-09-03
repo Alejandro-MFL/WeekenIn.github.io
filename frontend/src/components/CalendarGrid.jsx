@@ -40,7 +40,7 @@ export default function CalendarGrid(days, firstDay) {
   return (
 
       //  En el grid, con x columnas de yfr de ancho y con una separacion de fila-columna de gap: z
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 8 }}>
+      <div className = "CalendarGrid">
         {/*genera un array vacio de tamaño length, map recorre cada celda respecto al indice i*/}
         {Array.from({ length: weeks * daysPerWeek }).map((_, i) => {
           const date = addDays(i);
