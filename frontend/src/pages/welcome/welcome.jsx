@@ -26,10 +26,12 @@ export default function Home(){
         
         let today = new Date();
         let toWeek = 6 - today.getDay();
-        setFirstDay(toISO(today));        
+        let toMonday = today;
+        toMonday.setDate(toMonday.getDate()-(today.getDay()-1))
+        console.log(toMonday);
+        setFirstDay(toISO(toMonday));        
         if (today.getDay() < 5) 
-        {          
-         
+        {                   
           setToWeekend(toWeek);
           setTitleWeekend("Días para Weekend");        
         }

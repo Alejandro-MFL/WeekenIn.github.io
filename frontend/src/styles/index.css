@@ -101,8 +101,8 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
 
 /* CalendarButton */
 #calendarButton {
-  width: 80px;       /* ancho fijo */
-  height: 80px;       /* alto fijo */
+  width: 120px;       /* ancho fijo */
+  height: 120px;       /* alto fijo */
   padding: 10px;      /* espacio interno */
   margin: 5px;        /* espacio entre botones */
   font-size: 14px;    /* tamaño de letra */
@@ -124,7 +124,15 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   justify-items: center; /* centra los botones */
   
 }
-
+#DayText{
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;  /* o pon `normal` si prefieres salto de línea */
+  font-size: 0.59rem;
+  line-height: 0.9;
+  text-align: center;
+}
 
 
 
