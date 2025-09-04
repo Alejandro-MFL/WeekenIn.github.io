@@ -7,7 +7,7 @@
 }
 
 h1 {
-  color:rgb(0, 0, 0);
+  color:rgb(68, 51, 40);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 28px;
@@ -41,18 +41,55 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
 
 /* Header fijo/pegajoso */
 .site-header{
-  position: sticky; top: 0; z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
   backdrop-filter: saturate(120%) blur(6px);
-  background: rgba(229, 215, 196,0.6);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  border-radius: 18px;
-  border: 2px solid rgb(135, 119, 97);
+  background: linear-gradient( to bottom,  rgba(229, 215, 196,0.8) 0%, rgba(255, 255, 255, 0) 20%);
+     
 }
 .nav{
   display:flex; align-items:center; gap:16px;
-  max-width: 1100px; margin: 0 auto; padding: 14px 20px;
+  max-width: 1100px; margin: 0 auto; padding: 8px 8px;
 }
 .nav .spacer{ flex:1; }
+#headerButton{     
+    appearance: auto;
+    font-family: Arial, Helvetica, sans-serif;    
+    font-size: 15px;
+    font-weight: bold;
+    
+    text-rendering: auto;
+    
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    background: rgb(229, 215, 196);
+    color: rgb(69, 60, 60);
+    border-radius: var(--radius);
+    
+    
+    margin: 0em 0em 0em 0em;
+    padding-block: 5px;
+    padding-inline: 6px;
+    border-width: 1px;
+    border-style: outset;
+    border-image: initial; }
+    
+#headerButton :hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+}
 
 /* Contenido centrado */
 .site-main{ max-width:1100px; margin: 24px auto; padding: 0 20px; }
@@ -75,6 +112,8 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   border-radius: 12px;
   background: rgb(229, 215, 196);
   color: rgb(69, 60, 60);
+  
+  
 }
 .card h3{ margin: 0 0 8px; font-weight: 700; }
 .card input, .card button {
@@ -96,21 +135,30 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
 }
 .card button:hover {
   transform: scale(1.05);
+  box-shadow: var(--shadow);
 }
 .muted{ color: var(--muted); }
 
 /* CalendarButton */
 #calendarButton {
-  width: 120px;       /* ancho fijo */
-  height: 120px;       /* alto fijo */
-  padding: 10px;      /* espacio interno */
-  margin: 5px;        /* espacio entre botones */
-  font-size: 14px;    /* tamaño de letra */
-  border-radius: 20px; /* esquinas redondeadas */
-  border: 2px solid #654321; /* color de borde */
-  background-color: #f0e0c0; /* color de fondo */
+  position: relative;
+   min-width: 60px;              /* nunca más pequeños de 120px */
+  min-height: 60px;
+  aspect-ratio: 1/1;               /* cuadrado */
+  width: 100%;
+  border: 3px solid rgb(131, 107, 107);
+  background: var(--tile);
+  border-radius: 22px;
+  padding: 12px 14px 36px;         /* deja espacio para el número abajo */
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-start;          /* texto arriba */
+  justify-content: flex-start;
+
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: box-shadow .15s ease, transform .12s ease, border-color .15s ease;
+  color: var(--ink);
 }
 
 .CalendarButton:hover {
@@ -125,15 +173,36 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   
 }
 #DayText{
-  max-width: 100%;
+  width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  -webkit-line-clamp: 1; 
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;  /* o pon `normal` si prefieres salto de línea */
-  font-size: 0.59rem;
-  line-height: 0.9;
-  text-align: center;
+  display: -webkit-box;
+  max-width: 100%;  
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
-
+#numberDayText{
+   position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.numberDayText{
+   position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.numberDayText.isToday{
+  border-color: var(--stroke-soft);
+  border-spacing: 100px;
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 20px rgba(46, 226, 30, 0.5) inset;
+}
 
 
 
@@ -143,11 +212,12 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   display:grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 18px;
+  padding-top: 60px;
 }
 .col-4{ grid-column: span 4; }
 .col-6{ grid-column: span 6; }
 .col-8{ grid-column: span 8; }
-.col-12{ grid-column: span 12; }
+.col-12{ grid-column: span 12; min-width: 600px; }
 
 @media (max-width: 900px){
   .col-6,.col-4{ grid-column: span 12; }

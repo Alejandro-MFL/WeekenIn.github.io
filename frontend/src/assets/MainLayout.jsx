@@ -20,11 +20,11 @@ export default function MainLayout() {
         <header className="site-header">
             <nav className="nav">          
             <div className="spacer" /> 
-            <button onClick={goHome}>Home</button>
+            <button id = "headerButton" onClick={goHome}>Home</button>
             <div className="spacer" />
-            <p id="fo">WeekendIn</p>
+            <h1>WeekendIn</h1>
             <div className="spacer" />
-            <button onClick={Logout}>Logout</button>
+            <button id = "headerButton" onClick={Logout}>Logout</button>
             <div className="spacer" />           
             </nav>                    
         </header>

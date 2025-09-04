@@ -1,7 +1,7 @@
 import CalendarButton from "./CalendarButton";
 
 
-export default function CalendarGrid(days, firstDay) {
+export default function CalendarGrid(days) {
   const weeks = 4;
   const daysPerWeek = 7;  
 
@@ -34,7 +34,16 @@ export default function CalendarGrid(days, firstDay) {
     }
     return "wait"
   }
+   const today = (date) => {
+      let tday= new Date(); 
+      tday = tday.toISOString().slice(0, 10);    
+      if (dateInLocate (date) === dateInLocate (tday))
+        return true;
+      else{
+        false;
+      }
 
+   }
 
 
   return (
@@ -47,6 +56,7 @@ export default function CalendarGrid(days, firstDay) {
           const dayObj = searchDay(date); 
           const spainDate = dateInLocate (date);
           const key = i;
+          const tday = today(date)
 
           // si la fecha esta en la base se lo adjudica, si no undefined             
   
@@ -56,6 +66,7 @@ export default function CalendarGrid(days, firstDay) {
               date={spainDate}
               day={dayObj}      // si existe, lo pasas; si no, va undefined
               key={key}
+              tday = {tday}
             />
           );
         })}

@@ -29,7 +29,7 @@ export default function RegisterPage() {
     
           <div className="grid">
             <div className="col-8"><Card>
-                <h1>Aprovecha tus fines de semana</h1>
+                <h2>Aprovecha tus fines de semana</h2>
                 <h3>Con la mejor web para organizar tus fines de semana</h3>
                 <ul>
                     <li>Apunta los planes que siempre quisiste hacer</li>

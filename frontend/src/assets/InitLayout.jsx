@@ -15,9 +15,9 @@ export default function InitLayout() {
         <header className="site-header">
             <nav className="nav">  
             <div className="spacer" />         
-            <p id="fo">WeekendIn</p>
+            <h1>WeekendIn</h1>
             <div className="spacer" />
-            <button onClick={Login}>Login</button>
+            <button id = "headerButton" onClick={Login}>Login</button>
            
             </nav>
         

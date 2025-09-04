@@ -1,47 +1,53 @@
-export default function CalendarButton(dex) {    
+ import React from "react";
+ 
+ 
+ function CalendarButton(dex) {    
    if (dex.date === "wait") {
     return null; // no renderiza nada si está en espera
   }
-    
+    const today = dex.tday;
     const bdate = dex.date;    
     const bday = dex.day;
     function activeButton(){ 
-
+    
 
 
     
   }
-  
+  console.log(dex.tday);
     
     
 return (
-    <button  id = "calendarButton">
+    <button  id = "calendarButton" >
       {dex.day ? (
         <div>
-          {dex.day.desayuno ? ( <p id = "DayText"><strong>Desayuno:</strong> {dex.day.desayuno || "—"}</p>) 
+          {dex.day.desayuno ? ( <span id = "DayText"> {dex.day.desayuno || "—"}</span>) 
+          : ("") 
+          }          
+          {dex.day.mediodia ? ( <span id = "DayText"> {dex.day.mediodia || "—"}</span>) 
           : ("") 
           }
-          
-          {dex.day.mediodia ? ( <p id = "DayText"><strong>Mediodía:</strong> {dex.day.mediodia || "—"}</p>) 
+          {dex.day.comida ? ( <span id = "DayText"> {dex.day.comida || "—"}</span>) 
           : ("") 
           }
-          {dex.day.comida ? ( <p id = "DayText"><strong>Comida:</strong> {dex.day.comida || "—"}</p>) 
+          {dex.day.tarde ? ( <span id = "DayText"> {dex.day.tarde || "—"}</span>) 
           : ("") 
           }
-          {dex.day.tarde ? ( <p id = "DayText"><strong>Tarde:</strong> {dex.day.tarde || "—"}</p>) 
+          {dex.day.noche ? (<span id = "DayText"> {dex.day.noche || "—"}</span>) 
           : ("") 
           }
-          {dex.day.noche ? (<p id = "DayText"><strong>Noche:</strong> {dex.day.noche || "—"}</p>) 
-          : ("") 
-          }
-          {dex.day.cena  ? (<p id = "DayText"><strong>Cena:</strong> {dex.day.cena || "—"}</p>) 
+          {dex.day.cena  ? (<span id = "DayText"> {dex.day.cena || "—"}</span>) 
           : ("") 
           } 
-          <p id = "DayText"><strong>{dex.date}</strong> </p>
-        </div>
+          <span className={`numberDayText ${dex.tday ? 'isToday' : ''}`}
+          ><strong>{dex.date}</strong> </span>
+        </div>           
+        
       ) : (
-        <p>{dex.date}</p> // si no hay `day`, muestra solo la fecha
+        <span className={`numberDayText ${dex.tday ? 'isToday' : ''}`}><strong>{dex.date}</strong></span> // si no hay `day`, muestra solo la fecha
       )}
     </button>
   );
 }
+
+export default React.memo(CalendarButton);
