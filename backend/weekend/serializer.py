@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Plan, Day , Weekend
+from .models import Plan, Day
 
 class PlanSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,7 +17,3 @@ class DaysSerializer(serializers.ModelSerializer):
         fields = ("id","date","desayuno", "mediodia", "comida", "tarde", "cena", "noche")  
 
 
-class WeekendSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Weekend
-        fields = ("id", "friday")

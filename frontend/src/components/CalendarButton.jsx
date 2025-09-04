@@ -8,14 +8,9 @@
     const today = dex.tday;
     const bdate = dex.date;    
     const bday = dex.day;
-    function activeButton(){ 
+    function activeButton(){}
     
 
-
-    
-  }
-  console.log(dex.tday);
-    
     
 return (
     <button  id = "calendarButton" >

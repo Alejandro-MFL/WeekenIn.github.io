@@ -1,13 +1,13 @@
-from calendar import monthrange
 from datetime import timedelta,date
 from django.contrib.auth.models import User
 from django.utils import timezone
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework import status, generics, permissions
-from .models import Weekend, Plan, Day
+from .models import Plan, Day
 from .serializer import PlanSerializer, DaysSerializer
 
 
@@ -36,8 +36,7 @@ def me(request):
     user = request.user
     return Response({"id": user.id, "username": user.username}) 
 
- 
-
+############################# Plans ############################# 
 class MyPlansList(generics.ListAPIView):
     # Selecciona la serializacion(En rerializer.py) y quien tiene acceso
     serializer_class = PlanSerializer
@@ -49,6 +48,8 @@ class MyPlansList(generics.ListAPIView):
         return qs[:limit]
 
 
+
+############################# Days #############################
 class MyDaysWelcome(generics.ListAPIView):
     # Selecciona la serializacion(En serializer.py) y quien tiene acceso
     serializer_class = DaysSerializer
@@ -65,3 +66,31 @@ class MyDaysWelcome(generics.ListAPIView):
                   .order_by("date")
         )            
         return days[:]
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def updateOrCreateDay(request):
+    # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
+    date = request.data.get("date")
+    desayuno = request.data.get("desayuno")
+    mediodia = request.data.get("mediodia")
+    comida = request.data.get("comida")
+    tarde = request.data.get("tarde")
+    cena = request.data.get("cena") 
+    noche = request.data.get("noche") 
+    
+
+    day = Day.objects.update_or_create( date=date,defaults={desayuno:desayuno, mediodia:mediodia, comida:comida, tarde:tarde, cena:cena, noche:noche} )
+        
+    
+    return Response({"msg": "Dia creado"}, status=status.HTTP_201_CREATED)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def deleteDay(request):
+    # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
+    date = request.data.get("date")
+    
+    day = Day.objects.filter(date=date).delete        
+    
+    return Response({"msg": "Dia eliminado"})

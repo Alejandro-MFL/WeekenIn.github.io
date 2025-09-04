@@ -20,13 +20,13 @@ class Plan(models.Model):
             on_delete=models.CASCADE,       
             related_name="planes"
         )
-    nombre = models.CharField(max_length=120)     # "Plan"
+    nombre = models.CharField(max_length=120, null=True, blank=True)     # "Plan"
     zona = models.CharField(
-        max_length=2, choices=zona.choices
+        max_length=2, choices=zona.choices, null=True, blank=True
     )
-    provincia = models.CharField(max_length=100)  # revisar tablas meteorologia
+    provincia = models.CharField(max_length=100, null=True, blank=True)  # revisar tablas meteorologia
     precio = models.CharField(
-        max_length=2, choices=PrecioNivel.choices
+        max_length=2, choices=PrecioNivel.choices, null=True, blank=True
     )    
     day = models.ForeignKey("Day", null=True, blank=True, on_delete=models.SET_NULL,
                              related_name="plans")
@@ -40,38 +40,13 @@ class Plan(models.Model):
         return self.nombre
     
 
-class Weekend(models.Model):    
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="weekends"
-    )
-    friday = models.DateField()        
-
-
-    class Meta:
-        unique_together = [("user", "friday")]
-        ordering = ["-friday"]
-
-    def __str__(self):
-        return f"{ 'Weekend'}: {self.start_date:%d/%m/%Y}-{self.end_date:%d/%m/%Y}"
-
-    @property
-    def start_date(self):
-        return self.friday - timedelta(days=4)
-    @property
-    def end_date(self):
-        return self.friday + timedelta(days=2)
-
-    @property
-    def is_past(self):
-        return self.end_date < timezone.localdate()
-
 
 class Day(models.Model):
-    weekend = models.ForeignKey(
-        Weekend, on_delete=models.CASCADE, related_name="days"
-    )
+    user = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,       
+            related_name="days"
+        )
     date = models.DateField()                    
 
     # Es temporal
@@ -82,8 +57,7 @@ class Day(models.Model):
     cena     = models.CharField(max_length=200, blank=True)
     noche    = models.CharField(max_length=200, blank=True)
 
-    class Meta:
-        unique_together = [("weekend", "date")]
+    class Meta:        
         ordering = ["date"]
 
     def __str__(self):
