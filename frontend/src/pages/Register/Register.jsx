@@ -1,6 +1,8 @@
 import React from "react";
 import { register, login, me } from "../../features/auth/api";
 import Card from "../../components/Card";
+import { useNavigate, Link } from "react-router-dom";
+
 
 export default function RegisterPage() {
         
@@ -50,6 +52,9 @@ export default function RegisterPage() {
                     <span className="card" style={{padding:"6px 10px" }}>
                         <button>Registrarme</button>
                     </span>
+                    <p style={{marginTop:12}}>
+                        ¿Ya tienes cuenta? <Link to="/login">Entra</Link>
+                    </p>
                     
                    
                     

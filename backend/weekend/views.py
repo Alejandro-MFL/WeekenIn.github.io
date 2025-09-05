@@ -62,7 +62,7 @@ class MyDaysWelcome(generics.ListAPIView):
         lastDay = firstDay + timedelta(days= 7 * 4 -1)
         # Definimos la query con los datos que necesitamos enviar a welcome
         days = (Day.objects
-                  .filter(weekend__user=self.request.user, date__range=[firstDay, lastDay])
+                  .filter(user=self.request.user, date__range=[firstDay, lastDay])
                   .order_by("date")
         )            
         return days[:]
