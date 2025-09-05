@@ -6,6 +6,7 @@ import LoginPage from "./pages/Login/login";
 import WelcomePage from "./pages/welcome/welcome"
 import MainLayout from "./assets/MainLayout";
 import RegisterPage from "./pages/Register/Register";
+import PlansPage from "./pages/Plans/Plans";
 
 
 export default function App() {
@@ -20,6 +21,9 @@ export default function App() {
         </Route>
         <Route path="/Home" element={<MainLayout/>}>
           <Route index element={<WelcomePage/>}/>
+        </Route>
+        <Route path="/Plans" element={<MainLayout/>}>
+          <Route index element={<PlansPage/>}/>
         </Route>
       </Routes>      
     </HashRouter>

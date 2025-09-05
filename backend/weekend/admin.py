@@ -10,7 +10,7 @@ class DayAdmin(admin.ModelAdmin):
     
 
 @admin.register(Plan)
-class DayAdmin(admin.ModelAdmin):
+class PlanAdmin(admin.ModelAdmin):
    list_display = ("nombre","user", "precio","zona")
    list_filter = ("user", "precio", "zona")
    

@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../components/Card";
-import { getPlans, getDays } from "../../features/home/api";
+import { getPlans10, getDays } from "../../features/home/api";
 import CalendarGrid from "../../components/CalendarGrid";
 
 
@@ -25,37 +25,37 @@ export default function Home(){
 
     React.useEffect(() => {
         
-        let today = new Date();
-        let toWeek = 6 - today.getDay();
-        let toMonday = today;
-        toMonday.setDate(toMonday.getDate()-(today.getDay()-1))
-        console.log(toMonday);
-        setFirstDay(toISO(toMonday));        
-        if (today.getDay() < 5) 
-        {                   
-          setToWeekend(toWeek);
-          setTitleWeekend("Días para Weekend");        
-        }
-        else
-        {
-          setTitleWeekend("Ya estamos en Weekend");
-          setToWeekend("¿Qué quieres hacer hoy?");
-        }
-        
-        (async () => {
-        try {
-            const [p, d] = await Promise.all([            
-            getPlans(10),
-            getDays(),
-            ]);
+      let today = new Date();
+      let toWeek = 6 - today.getDay();
+      let toMonday = today;
+      toMonday.setDate(toMonday.getDate()-(today.getDay()-1))        
+      setFirstDay(toISO(toMonday));        
+      if (today.getDay() < 5) 
+      {                   
+        setToWeekend(toWeek);
+        setTitleWeekend("Días para Weekend");        
+      }
+      else
+      {
+        setTitleWeekend("Ya estamos en Weekend");
+        setToWeekend("¿Qué quieres hacer hoy?");
+      }
+      
+      (async () => {
+      try {
+          const [p, d] = await Promise.all([            
+          getPlans10(10),
+          getDays(),
+          ]);
 
-            setPlans(p.results || p);   // por si usas paginación luego
-            setDays(d);
-            console.log(d);
-        } catch (e) {
-            console.error(e);
-        }
-        })();
+          setPlans(p.results || p);   // por si usas paginación luego
+          setDays(d);
+          console.log(p);
+          console.log(d);
+      } catch (e) {
+          console.error(e);
+      }
+      })();
     }, []);
 
   return (
