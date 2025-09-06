@@ -184,14 +184,14 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   word-break: break-word;
 }
 #numberDayText{
-   position: absolute;
+  position: absolute;
   right: 12px;
   bottom: 10px;
   font-weight: 800;
   letter-spacing: .5px;
 }
 .numberDayText{
-   position: absolute;
+  position: absolute;
   right: 12px;
   bottom: 10px;
   font-weight: 800;
@@ -203,8 +203,54 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   border-radius: var(--radius);
   box-shadow: 0 0 0 20px rgba(46, 226, 30, 0.5) inset;
 }
+#plan-li{
+  display: flex;              /* activa flexbox */
+  align-items: center;        /* centra verticalmente texto y botón */
+  justify-content: space-between; /* separa texto a la izquierda y botón a la derecha */
+  margin: 0.3rem 0;           /* espacio entre items */
+  /*list-style: none;           /* quita los puntos, si quieres */
+}
+
+#savebutton{
+  
+  border: 3px solid rgb(131, 107, 107);
+  background: rgb(224, 212, 195);
+  font-style:italic;
+  cursor: pointer;  
+  font-size: 0.95rem;
+  justify-content: space-between;
+  text-align: center;  
+  position: static;
+  right: 1px;
+  bottom: 10px;
+  white-space: nowrap;
+  font-weight: bold;
+  border-radius: var(--radius);
+    
+}
+#savebutton:hover{
+  transform: scale(1.1);
+  box-shadow: var(--shadow);  
+}
 
 
+#minibutton{
+  max-width: 30px;
+  max-height: 30px;
+  border: 2px solid rgb(131, 107, 107);
+  cursor: pointer;
+  text-align: center;
+  align-items: center;        /* centra verticalmente texto y botón */
+  justify-content: space-between;
+  font-size: 0.95rem;
+  overflow: hidden;           /* Si sobra lo esconde*/  
+  margin: 0.3rem 0; 
+  align-items: center; 
+  padding: 0%; 
+}
+#minibutton:hover {
+  transform: scale(1.2);
+}
 
 
 /* Grid responsivo */

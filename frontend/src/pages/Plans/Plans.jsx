@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { getPlans} from "../../features/days/api";
 import Card from "../../components/Card";
 
@@ -7,7 +7,12 @@ import Card from "../../components/Card";
 export default function AllPlans() {    
     const [plans, setPlans] = React.useState([]);
     
-    
+    function NuevoPlanButton(){
+        
+    }
+    function deletePlanButton(){
+
+    }
 
     React.useEffect(() => {
           
@@ -27,10 +32,14 @@ export default function AllPlans() {
     return (
     <>          
         <div className="grid">
-            
-            <div className="col-8"><Card title="Tus planes">
+            <button id="savebutton" >Nuevo plan</button>
+            <div className="col-12"><Card title="Tus planes"> 
             <ul> 
-                {plans.map(pl=> <li key={pl.id}>{pl.nombre}</li>)}             
+                {plans.map(pl=> <li key={pl.id} id="plan-li">
+                        <span> {pl.nombre} </span>  <button id="minibutton" >❌</button>
+                    </li>
+                
+                )}             
                     
             </ul>
             </Card></div> 
