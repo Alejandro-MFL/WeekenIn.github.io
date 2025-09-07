@@ -108,7 +108,7 @@ def updateOrCreatePlan(request):
     user = request.user
     
 
-    Plan = Plan.objects.update_or_create( user=request.user,date=date,defaults={user:id, nombre:nombre, precio:precio, zona:zona, provincia:provincia} )
+    planNew = Plan.objects.update_or_create( nombre=nombre,defaults={"user":user, "precio":precio, "zona":zona, "provincia":provincia} )
         
     
     return Response({"msg": "Plan creado"}, status=status.HTTP_201_CREATED)

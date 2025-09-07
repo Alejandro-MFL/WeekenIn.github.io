@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getPlans,deletePlans,updatePlans} from "../../features/days/api";
 import Card from "../../components/Card";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AllPlans() {    
@@ -12,18 +13,26 @@ export default function AllPlans() {
     const [provincia, setProvincia] = React.useState("");
     const [plans, setPlans] = React.useState([]);
     const [showForm, setShowForm] = React.useState(false);
-
-    function NuevoPlanButton(){
-        
-    }
-    async function deletePlanButton(PlanId){                                                   // actualiza errores a nada
-        
+    const navigate = useNavigate();
+    
+    async function deletePlanButton(PlanId){  
         try {
-            console.log(PlanId)
-            await deletePlans(PlanId)
+            console.log(PlanId);
+            await deletePlans(PlanId);
+            navigate(0);
         }
-        finally {
-                    
+        finally {  
+                       
+        }
+    }
+     async function updatePlan(){  
+        try {
+            console.log(nombre, precio,zona,provincia)
+            await updatePlans(nombre, precio,zona,provincia)
+            navigate(0);
+            }
+        finally {  
+                               
         }
     }
 
@@ -78,7 +87,7 @@ export default function AllPlans() {
                 <div style={{maxWidth: 420, margin: "40px auto", padding: 16}}><Card >
                         
                         <h2>Nuevo plan<button  id="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>
-                        <form  style={{display:"grid", gap:12}}>
+                        <form  onSubmit={updatePlan} style={{display:"grid", gap:12}}>
                             
                             <label>
                             Tu plan
@@ -132,7 +141,11 @@ export default function AllPlans() {
                             <button disabled={loading || !user || !password}>
                             {loading ? "Entrando..." : "Entrar"}
                             </button>*/}
-                            
+                            <span className="card" style={{padding:"6px 10px"}}>
+                                <button disabled={!nombre}>
+                                {!nombre ? "Falta el plan" : "Guardar"}
+                                </button>
+                            </span>
                         </form>
                 
                         </Card></div>
