@@ -32,7 +32,7 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   position: fixed; inset: 0;
   background:
     radial-gradient(40% 30% at 10% 10%, #030303 0%, transparent 60%),
-    radial-gradient(35% 25% at 85% 20%, #22222a 0%, transparent 60%),
+    radial-gradient(35% 25% at 85% 20%, #3131a0 0%, transparent 60%),
     radial-gradient(50% 40% at 50% 90%, #1f1f27 0%, transparent 60%),
     linear-gradient(#000000, #0e0e10);
   z-index: -1;           /* queda detrás de todo */
@@ -251,7 +251,27 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
 #minibutton:hover {
   transform: scale(1.2);
 }
+.modal-overlay {
+  position: fixed;      /* se queda fijo sobre la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* ocupa todo el ancho */
+  height: 100vh;        /* ocupa todo el alto */
+  background: rgba(0,0,0,0.5); /* fondo oscuro translúcido */
+  display: flex;        /* centra el contenido */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;        /* se asegura de estar por encima */
+}
 
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 
 /* Grid responsivo */
 .grid{
@@ -259,6 +279,7 @@ body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sa
   grid-template-columns: repeat(12, 1fr);
   gap: 18px;
   padding-top: 60px;
+ 
 }
 .col-4{ grid-column: span 4; }
 .col-6{ grid-column: span 6; }

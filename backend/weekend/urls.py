@@ -15,7 +15,11 @@ urlpatterns = [
     path("api/plans/", MyPlansList.as_view()),
     path("api/day/", MyDaysWelcome.as_view()),
     path("api/day/delete", views.deleteDay),
-    path("api/day/update", views.updateOrCreateDay)
+    path("api/day/update", views.updateOrCreateDay),
+    path("api/plan/delete", views.deletePlan),
+    path("api/plan/update", views.updateOrCreatePlan),
+    
+
     
 ]
 

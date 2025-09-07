@@ -69,16 +69,17 @@ export default function LoginPage() {
           </label>
 
           {error && <div style={{color:"crimson"}}>{error}</div>}
-
-          <button disabled={loading || !user || !password}>
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
+          <span className="card" style={{padding:"6px 10px"}}>
+            <button disabled={loading || !user || !password}>
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
+          </span>
         </form>
 
-      <p style={{marginTop:12}}>
-        ¿No tienes cuenta? <Link to="/">Regístrate</Link>
-      </p>
-    </Card></div>
+        <p style={{marginTop:12}}>
+          ¿No tienes cuenta? <Link to="/">Regístrate</Link>
+        </p>
+      </Card></div>
   );
 }
 

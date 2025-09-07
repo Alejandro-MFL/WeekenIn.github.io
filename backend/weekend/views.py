@@ -79,6 +79,7 @@ def updateOrCreateDay(request):
     cena = request.data.get("cena") 
     noche = request.data.get("noche") 
     
+    
 
     day = Day.objects.update_or_create( date=date,defaults={desayuno:desayuno, mediodia:mediodia, comida:comida, tarde:tarde, cena:cena, noche:noche} )
         
@@ -91,6 +92,35 @@ def deleteDay(request):
     # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
     date = request.data.get("date")
     
-    day = Day.objects.filter(date=date).delete        
+    day = Day.objects.filter(user=request.user,date=date).delete        
+    
+    return Response({"msg": "Dia eliminado"})
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def updateOrCreatePlan(request):
+    # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
+    nombre = request.data.get("nombre")
+    precio = request.data.get("precio")
+    zona = request.data.get("zona")
+    provincia = request.data.get("provincia")
+    user = request.user
+    
+
+    Plan = Plan.objects.update_or_create( user=request.user,date=date,defaults={user:id, nombre:nombre, precio:precio, zona:zona, provincia:provincia} )
+        
+    
+    return Response({"msg": "Plan creado"}, status=status.HTTP_201_CREATED)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def deletePlan(request):
+    # Funciona con DRF, reques.data es donde se almacenan los datos en forma JSON
+    
+    idPlan = request.data.get("id")
+    
+    planDead = Plan.objects.filter(user=request.user, id=idPlan).delete()        
     
     return Response({"msg": "Dia eliminado"})
