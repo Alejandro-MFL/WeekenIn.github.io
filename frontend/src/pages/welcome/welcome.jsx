@@ -2,8 +2,8 @@ import React from "react";
 import Card from "../../components/Card";
 import { getPlans10, getDays } from "../../features/home/api";
 import CalendarGrid from "../../components/CalendarGrid";
-
-
+import { useNavigate } from "react-router-dom";
+import lapicerito from "../../../public/lapiz.png"
 
 
 
@@ -14,14 +14,17 @@ export default function Home(){
     const [plans, setPlans] = React.useState([]);
     const [days, setDays] = React.useState([]);
     const [firstDay, setFirstDay] = React.useState("Cargando…");
-    
+    const navigate = useNavigate();
+
     function toISO(d) {
       const yyyy = d.getFullYear();
       const mm = String(d.getMonth() + 1).padStart(2, "0");
       const dd = String(d.getDate()).padStart(2, "0");
       return `${yyyy}-${mm}-${dd}`;
     }
-    
+    function GoPlans() {
+      navigate("/Plans")
+    }
 
     React.useEffect(() => {
         
@@ -66,7 +69,12 @@ export default function Home(){
                 {<h2>{toWeekend}</h2>}
             </Card></div>
             {/*Planes*/}
-            <div className="col-8"><Card title="Tus planes">
+            <div className="col-8"><Card >
+              <h2>Tus planes
+                <button style={{padding:0}} onClick={()=> GoPlans()}>
+                <img src={lapicerito} alt="lapicerito" style={{padding:0, width: "20px", height: "20px" }} />
+              </button></h2>
+              
             <ul>            
                 {plans.slice(0,10).map(pl=> <li key={pl.id}>{pl.nombre}</li>)}      
             </ul>
