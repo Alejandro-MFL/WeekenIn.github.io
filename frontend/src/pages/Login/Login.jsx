@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login, me } from "../../features/auth/api";
-import Card from "../../components/Card";
+
 
 export default function LoginPage() {
   const [user, setU] = React.useState("");
@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   return (
 
-      <div style={{maxWidth: 420, margin: "40px auto", padding: 16}}><Card >
+      <div className= "card 8"style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
         <h1>Inicia sesión</h1>
         <form onSubmit={onSubmit} style={{display:"grid", gap:12}}>
           <label>
@@ -79,7 +79,7 @@ export default function LoginPage() {
         <p style={{marginTop:12}}>
           ¿No tienes cuenta? <Link to="/">Regístrate</Link>
         </p>
-      </Card></div>
+      </div>
   );
 }
 

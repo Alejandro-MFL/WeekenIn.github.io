@@ -13,7 +13,7 @@
 
     
 return (
-    <button  id = "calendarButton" >
+    <button  className = "calendarButton" >
       {dex.day ? (
         <div>
           {dex.day.desayuno ? ( <span id = "DayText"> {dex.day.desayuno || "—"}</span>) 

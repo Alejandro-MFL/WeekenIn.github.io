@@ -1,6 +1,6 @@
 import React from "react";
 import { register, login, me } from "../../features/auth/api";
-import Card from "../../components/Card";
+
 import { useNavigate, Link } from "react-router-dom";
 
 
@@ -30,7 +30,7 @@ export default function RegisterPage() {
           
     
           <div className="grid">
-            <div className="col-8"><Card>
+            <div className="card 8">
                 <h2>Aprovecha tus fines de semana</h2>
                 <h3>Con la mejor web para organizar tus fines de semana</h3>
                 <ul>
@@ -39,9 +39,10 @@ export default function RegisterPage() {
                     <li>Organizate según el clima y el tiempo que tengas</li>
                 </ul>
                 <h2>Y disfruta de tu finde semana con WeekendIn!</h2>                
-            </Card></div>
+            </div>
 
-            <div className="col-4"><Card title="Registrate">
+            <div className="card 4">
+                <h3>Registrate</h3>
                 <form onSubmit={onSubmit}>
                      <span className="card" style={{padding:"6px 10px"}}>
                         <input value={user} onChange={e=>setUser(e.target.value)} placeholder="usuario" />
@@ -60,12 +61,9 @@ export default function RegisterPage() {
                     
                     <pre>{out}</pre>
                 </form> 
-            </Card></div>
+            </div>
     
     
-            <div className="col-12"><Card title="Web desarrollada por Alejandro M Fernández">
-              <h4>Web en desarrollo</h4>
-            </Card></div>
           </div>
         </>
       );

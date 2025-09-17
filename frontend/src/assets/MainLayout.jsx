@@ -16,27 +16,25 @@ export default function MainLayout() {
 
 
   return (
-    <div>
-        <header className="site-header">
-            <nav className="nav">          
-            <div className="spacer" /> 
-            <button id = "headerButton" onClick={goHome}>Home</button>
-            <div className="spacer" />
-            <h1>WeekendIn</h1>
-            <div className="spacer" />
-            <button id = "headerButton" onClick={Logout}>Logout</button>
-            <div className="spacer" />           
-            </nav>                    
+    <section className="container">
+        <header> 
+            
+            <button id = "headerButton" onClick={goHome}>Home</button>            
+            <h1>WeekendIn</h1>           
+            <button id = "headerButton" onClick={Logout}>Logout</button> 
+                     
+             
         </header>
 
-        <main style={{ padding: "1rem" }}>
-            
-            <Outlet name="main"/>
+        <main>  
+            <section>
+                <Outlet name="main"/>
+            </section>
         </main>
 
         <footer>
             
         </footer>
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../components/Card";
+
 import { getPlans10, getDays } from "../../features/home/api";
 import CalendarGrid from "../../components/CalendarGrid";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ export default function Home(){
     const [plans, setPlans] = React.useState([]);
     const [days, setDays] = React.useState([]);
     const [firstDay, setFirstDay] = React.useState("Cargando…");
+     const [showForm, setShowForm] = React.useState(false);
     const navigate = useNavigate();
 
     function toISO(d) {
@@ -63,13 +64,14 @@ export default function Home(){
 
   return (
     <>          
-        <div className="grid">
+       
             {/*Dias para finde*/}
-            <div className="col-4"><Card title={titleWeekend} >
+            <div className="card s4">
+                <h3>{titleWeekend}</h3>
                 {<h2>{toWeekend}</h2>}
-            </Card></div>
+            </div>
             {/*Planes*/}
-            <div className="col-8"><Card >
+            <div className="card s8">
               <h2>Tus planes
                 <button style={{padding:0}} onClick={()=> GoPlans()}>
                 <img src={lapicerito} alt="lapicerito" style={{padding:0, width: "20px", height: "20px" }} />
@@ -78,17 +80,18 @@ export default function Home(){
             <ul>            
                 {plans.slice(0,10).map(pl=> <li key={pl.id}>{pl.nombre}</li>)}      
             </ul>
-            </Card></div>
+            </div>
             {/*Calendario*/}
-            <div className="col-12"><Card title="Mes">  
-              {console.log(days)}            
-             {<div className="col-4"><CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
+            <div className="card s12"> 
+              {console.log(days)} 
+              <p>enero</p>           
+              {<CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
                 {<h2>{toWeekend}</h2>}                
-              </CalendarGrid></div>
+              </CalendarGrid>
              /*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
-            </Card></div>
+            </div>
 
-        </div>
+        
     </>);
 };
 

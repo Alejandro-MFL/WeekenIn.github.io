@@ -1,0 +1,291 @@
+:root{
+    --bg: rgb(229, 215, 196);         /* fondo general */
+    --panel: #1e1c1c;      /* tarjetas */
+    --muted: #a3a3a3;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(46, 3, 62, 0.295);
+
+}
+h1 {
+  color:rgb(68, 51, 40);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+#fo {
+  color:rgb(41, 39, 40);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+
+}
+
+html,body,#root,.app { height: 100%; }
+body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, sans-serif; }
+
+/* Fondo “ambiental” fijo */
+.app::before{
+  content:"";
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(40% 30% at 10% 10%, #b01c1c 0%, transparent 60%),
+    radial-gradient(35% 25% at 85% 20%, #3131a0 0%, transparent 60%),
+    radial-gradient(50% 40% at 50% 90%, #1f1f27 0%, transparent 60%),
+    linear-gradient(#000000, #0e0e10);
+  z-index: -1;           /* queda detrás de todo */
+  filter: blur(0.5px);
+}
+
+/* Header fijo/pegajoso */
+.site-header{
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
+  backdrop-filter: saturate(120%) blur(6px);
+  background: linear-gradient( to bottom,  rgba(229, 215, 196,0.8) 0%, rgba(255, 255, 255, 0) 20%);
+     
+}
+.nav{
+  display:flex; align-items:center; gap:16px;
+  max-width: 1100px; margin: 0 auto; padding: 8px 8px;
+}
+.nav .spacer{ flex:1; }
+#headerButton{     
+    appearance: auto;
+    font-family: Arial, Helvetica, sans-serif;    
+    font-size: 15px;
+    font-weight: bold;
+    
+    text-rendering: auto;
+    
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    background: rgb(229, 215, 196);
+    color: rgb(69, 60, 60);
+    border-radius: var(--radius);
+    
+    
+    margin: 0em 0em 0em 0em;
+    padding-block: 5px;
+    padding-inline: 6px;
+    border-width: 1px;
+    border-style: outset;
+    border-image: initial; }
+    
+#headerButton :hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+}
+
+/* Contenido centrado */
+.site-main{ max-width:1100px; margin: 24px auto; padding: 0 20px; }
+
+
+/*--------------------------Componentes--------------------------*/
+
+/* Utilidades tarjetas */
+.card{
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;           /* espacio interno */
+  border: 4px solid rgb(135, 119, 97);
+  display: flex;
+  flex-direction: column;   /* coloca elementos uno debajo de otro */
+  align-items: center;      /* centra horizontalmente */
+  justify-content: center;  /* centra verticalmente (si le das altura fija) */
+  gap: 10px;                /* espacio uniforme entre elementos */            
+  border-radius: 12px;
+  background: rgb(229, 215, 196);
+  color: rgb(69, 60, 60);
+  
+  
+}
+.card h3{ margin: 0 0 8px; font-weight: 700; }
+.card input, .card button {
+  width: 100%;   
+  height: 100%;       
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.card button {  
+  text-align: center;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  color: rgb(40, 36, 36);
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+.card button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+}
+.muted{ color: var(--muted); }
+
+/* CalendarButton */
+#calendarButton {
+  position: relative;
+   min-width: 60px;              /* nunca más pequeños de 120px */
+  min-height: 60px;
+  aspect-ratio: 1/1;               /* cuadrado */
+  width: 100%;
+  border: 3px solid rgb(131, 107, 107);
+  background: var(--tile);
+  border-radius: 22px;
+  padding: 12px 14px 36px;         /* deja espacio para el número abajo */
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-start;          /* texto arriba */
+  justify-content: flex-start;
+
+  cursor: pointer;
+  transition: box-shadow .15s ease, transform .12s ease, border-color .15s ease;
+  color: var(--ink);
+}
+
+.CalendarButton:hover {
+  background-color: #e5d0a8;
+  transform: scale(1.05);
+}
+.CalendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas, una por día */
+  gap: 10px;
+  justify-items: center; /* centra los botones */
+  
+}
+#DayText{
+  width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  -webkit-line-clamp: 1; 
+  overflow: hidden;
+  display: -webkit-box;
+  max-width: 100%;  
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+#numberDayText{
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.numberDayText{
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.numberDayText.isToday{
+  border-color: var(--stroke-soft);
+  border-spacing: 100px;
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 20px rgba(46, 226, 30, 0.5) inset;
+}
+#plan-li{
+  display: flex;              /* activa flexbox */
+  align-items: center;        /* centra verticalmente texto y botón */
+  justify-content: space-between; /* separa texto a la izquierda y botón a la derecha */
+  margin: 0.3rem 0;           /* espacio entre items */
+  /*list-style: none;           /* quita los puntos, si quieres */
+}
+
+#savebutton{
+  
+  border: 3px solid rgb(131, 107, 107);
+  background: rgb(224, 212, 195);
+  font-style:italic;
+  cursor: pointer;  
+  font-size: 0.95rem;
+  justify-content: space-between;
+  text-align: center;  
+  position: static;
+  right: 1px;
+  bottom: 10px;
+  white-space: nowrap;
+  font-weight: bold;
+  border-radius: var(--radius);
+    
+}
+#savebutton:hover{
+  transform: scale(1.1);
+  box-shadow: var(--shadow);  
+}
+
+
+#minibutton{
+  max-width: 30px;
+  max-height: 30px;
+  border: 2px solid rgb(131, 107, 107);
+  cursor: pointer;
+  text-align: center;
+  align-items: center;        /* centra verticalmente texto y botón */
+  justify-content: space-between;
+  font-size: 0.95rem;
+  overflow: hidden;           /* Si sobra lo esconde*/  
+  margin: 0.3rem 0; 
+  align-items: center; 
+  padding: 0%; 
+}
+#minibutton:hover {
+  transform: scale(1.2);
+}
+.modal-overlay {
+  position: fixed;      /* se queda fijo sobre la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* ocupa todo el ancho */
+  height: 100vh;        /* ocupa todo el alto */
+  background: rgba(0,0,0,0.5); /* fondo oscuro translúcido */
+  display: flex;        /* centra el contenido */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;        /* se asegura de estar por encima */
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Grid responsivo */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+  padding-top: 60px;
+ 
+}
+.col-4{ grid-column: span 4; }
+.col-6{ grid-column: span 6; }
+.col-8{ grid-column: span 8; }
+.col-12{ grid-column: span 12; min-width: 600px; }
+
+@media (max-width: 900px){
+  .col-6,.col-4{ grid-column: span 12; }
+}
