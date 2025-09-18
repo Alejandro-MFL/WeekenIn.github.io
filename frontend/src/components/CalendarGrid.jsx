@@ -42,14 +42,17 @@ export default function CalendarGrid(days) {
       else{
         false;
       }
-
    }
+   
 
 
   return (
 
       //  En el grid, con x columnas de yfr de ancho y con una separacion de fila-columna de gap: z
       <div className = "CalendarGrid">
+        <h3>L</h3>
+        <h3>M</h3><h3>M</h3><h3>J</h3>
+        <h3>V</h3><h3>S</h3><h3>D</h3>
         {/*genera un array vacio de tamaño length, map recorre cada celda respecto al indice i*/}
         {Array.from({ length: weeks * daysPerWeek }).map((_, i) => {
           const date = addDays(i);
@@ -59,7 +62,7 @@ export default function CalendarGrid(days) {
           const tday = today(date)
 
           // si la fecha esta en la base se lo adjudica, si no undefined             
-  
+          
           return (
             // Renderiza cada boton, con una clave, una fecha y el day si esta
             <CalendarButton              

@@ -29,8 +29,8 @@ export default function RegisterPage() {
         <>
           
     
-          <div className="grid">
-            <div className="card 8">
+          
+            <div className="card s8">
                 <h2>Aprovecha tus fines de semana</h2>
                 <h3>Con la mejor web para organizar tus fines de semana</h3>
                 <ul>
@@ -41,30 +41,28 @@ export default function RegisterPage() {
                 <h2>Y disfruta de tu finde semana con WeekendIn!</h2>                
             </div>
 
-            <div className="card 4">
+            <div className="card s4">
                 <h3>Registrate</h3>
                 <form onSubmit={onSubmit}>
-                     <span className="card" style={{padding:"6px 10px"}}>
+                     <span>
                         <input value={user} onChange={e=>setUser(e.target.value)} placeholder="usuario" />
                      </span>
-                    <span className="card" style={{padding:"6px 10px"}}>
+                    <span>
                         <input value={password} onChange={e=>setPassword(e.target.value)} type="password" placeholder="contraseña" />
                     </span>
-                    <span className="card" style={{padding:"6px 10px" }}>
+                    <span>
                         <button>Registrarme</button>
                     </span>
                     <p style={{marginTop:12}}>
                         ¿Ya tienes cuenta? <Link to="/login">Entra</Link>
                     </p>
                     
-                   
-                    
                     <pre>{out}</pre>
                 </form> 
             </div>
     
     
-          </div>
+          
         </>
       );
 

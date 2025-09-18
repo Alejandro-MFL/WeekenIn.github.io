@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   return (
 
-      <div className= "card 8"style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
+      <div className= "card s8"style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
         <h1>Inicia sesión</h1>
         <form onSubmit={onSubmit} style={{display:"grid", gap:12}}>
           <label>

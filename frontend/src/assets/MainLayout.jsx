@@ -33,7 +33,8 @@ export default function MainLayout() {
         </main>
 
         <footer>
-            
+            <h3>"Web desarrollada por Alejandro M Fernández"</h3>
+            <h4>Web en desarrollo</h4>
         </footer>
     </section>
   );

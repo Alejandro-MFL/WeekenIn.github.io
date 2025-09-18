@@ -63,33 +63,35 @@ export default function Home(){
     }, []);
 
   return (
-    <>          
-       
-            {/*Dias para finde*/}
-            <div className="card s4">
-                <h3>{titleWeekend}</h3>
-                {<h2>{toWeekend}</h2>}
-            </div>
-            {/*Planes*/}
-            <div className="card s8">
-              <h2>Tus planes
-                <button style={{padding:0}} onClick={()=> GoPlans()}>
-                <img src={lapicerito} alt="lapicerito" style={{padding:0, width: "20px", height: "20px" }} />
-              </button></h2>
-              
-            <ul>            
-                {plans.slice(0,10).map(pl=> <li key={pl.id}>{pl.nombre}</li>)}      
-            </ul>
-            </div>
-            {/*Calendario*/}
-            <div className="card s12"> 
-              {console.log(days)} 
-              <p>enero</p>           
-              {<CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
-                {<h2>{toWeekend}</h2>}                
-              </CalendarGrid>
-             /*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
-            </div>
+    <>         
+      {/*Dias para finde*/}
+      <div className="card s4">
+        <h3>{titleWeekend}</h3>
+        {<h2>{toWeekend}</h2>}
+      </div>
+
+      {/*Planes*/}
+      <div className="card s8">
+        
+        <h2>Tus planes
+          <button style={{padding:0}} onClick={()=> GoPlans()}>
+          <img src={lapicerito} alt="lapicerito" style={{padding:0, width: "20px", height: "20px" }} />
+        </button></h2>
+        
+        <ul>            
+            {plans.slice(0,10).map(pl=> <li key={pl.id}>{pl.nombre}</li>)}      
+        </ul>
+      </div>
+
+      {/*Calendario*/}
+      <div className="card s12"> 
+        {console.log(days)} 
+        <p>enero</p>           
+        {<CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
+          {<h2>{toWeekend}</h2>}                
+        </CalendarGrid>
+        /*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
+      </div>
 
         
     </>);
