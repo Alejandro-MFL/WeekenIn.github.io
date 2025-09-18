@@ -67,25 +67,28 @@ export default function AllPlans() {
 
     return (
     <>          
-        <div className="grid">
-            <button id="savebutton" onClick={()=> setShowForm(!showForm)} >Nuevo plan</button>
-            <div className="card 12">
-                <h3>Tus planes</h3>   
-                <ul> 
-                    {plans.map(pl=> <li key={pl.id} id="plan-li">
-                            <span> {pl.nombre} </span>  <button value={pl.id} onClick={()=>deletePlanButton(pl.id)} id="minibutton" >❌</button>
-                        </li>
+        
+       
+        <div className="card s8" style={{placeItems: "center", position:"relative"}}>
+             
+            <h>Tus planes</h>
+            <button className="savebutton" onClick={()=> setShowForm(!showForm)} >Nuevo plan</button>   
+            <ul className="listas"> 
+                {plans.map(pl=> <li key={pl.id} >
+                        <span> {pl.nombre} </span>
+                        <button style={{position:"absolute",right:40}} value={pl.id} onClick={()=>deletePlanButton(pl.id)} id="minibutton" >❌</button>
+                    </li>
+                
+                )}             
                     
-                    )}             
-                        
-                </ul>
-            </div> 
+            </ul>
         </div> 
+         
         {showForm && (
          <div className="modal-overlay">
             <div className="form-container">
                 
-                <div className="card 8" style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
+                <div className="card s8" style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
                         
                         <h2>Nuevo plan<button  id="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>
                         <form  onSubmit={updatePlan} style={{display:"grid", gap:12}}>

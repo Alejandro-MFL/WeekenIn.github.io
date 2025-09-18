@@ -1,19 +1,25 @@
  import React from "react";
  
  
- function CalendarButton(dex) {    
-   if (dex.date === "wait") {
+ function CalendarButton(dex) {  
+  
+  if (dex.date === "wait") {
     return null; // no renderiza nada si está en espera
   }
+  else{
     const today = dex.tday;
     const bdate = dex.date;    
     const bday = dex.day;
     function activeButton(){}
+    console.log(dex.date);  
+    console.log(dex.tday);
+  }
+    
     
 
     
 return (
-    <button  className = "calendarButton" >
+    <button  className ={`calendarButton ${dex.tday ? 'isToday' : (dex.date.month ? '':'otherMonth')}`} >
       {dex.day ? (
         <div>
           {dex.day.desayuno ? ( <span id = "DayText"> {dex.day.desayuno || "—"}</span>) 
@@ -34,12 +40,15 @@ return (
           {dex.day.cena  ? (<span id = "DayText"> {dex.day.cena || "—"}</span>) 
           : ("") 
           } 
-          <span className={`numberDayText ${dex.tday ? 'isToday' : ''}`}
-          ><strong>{dex.date}</strong> </span>
+          <span className="numberDayText">
+            <strong>{dex.date.date}</strong> 
+          </span>
         </div>           
         
       ) : (
-        <span className={`numberDayText ${dex.tday ? 'isToday' : ''}`}><strong>{dex.date}</strong></span> // si no hay `day`, muestra solo la fecha
+        <span className="numberDayText">
+          <strong>{dex.date.date}</strong>
+        </span> // si no hay `day`, muestra solo la fecha
       )}
     </button>
   );

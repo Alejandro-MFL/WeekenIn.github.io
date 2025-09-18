@@ -85,8 +85,7 @@ export default function Home(){
 
       {/*Calendario*/}
       <div className="card s12"> 
-        {console.log(days)} 
-        <p>enero</p>           
+        {console.log(days)}                  
         {<CalendarGrid days={days} firstDay={firstDay} title={titleWeekend} >
           {<h2>{toWeekend}</h2>}                
         </CalendarGrid>
