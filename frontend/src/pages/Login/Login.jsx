@@ -40,24 +40,24 @@ export default function LoginPage() {
 
   return (
 
-      <div className= "card s8"style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
+      <div className= "card" style={{width: "500px", maxHeight:"400px"}}>
         <h1>Inicia sesión</h1>
-        <form onSubmit={onSubmit} style={{display:"grid", gap:12}}>
-          <label>
-            Usuario 
-            <span className="card" style={{padding:"6px 10px"}}>
+        <form onSubmit={onSubmit} style={{ position:"relative",display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
+          <div>
+            Usuario  
+          </div>
+          <span >
                <input
                 value={user}
                 onChange={(e)=>setU(e.target.value)}
                 placeholder="tu usuario"
                 autoComplete="username"
               />
-              </span>            
-             
-          </label>
+          </span>        
           <label>
-            Contraseña 
-            <span className="card" style={{padding:"6px 10px"}}>
+            Contraseña               
+          </label>
+          <span>
               <input
                 value={password}
                 onChange={(e)=>setP(e.target.value)}
@@ -65,15 +65,14 @@ export default function LoginPage() {
                 placeholder="tu contraseña"
                 autoComplete="current-password"
               />
-            </span>            
-          </label>
+            </span>          
 
           {error && <div style={{color:"crimson"}}>{error}</div>}
-          <span className="card" style={{padding:"6px 10px"}}>
+          <div style={{padding:"20px 10px"}}>
             <button disabled={loading || !user || !password}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
-          </span>
+          </div>
         </form>
 
         <p style={{marginTop:12}}>

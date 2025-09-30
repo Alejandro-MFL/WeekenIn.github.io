@@ -68,93 +68,91 @@ export default function AllPlans() {
     return (
     <>          
         
-       
-        <div className="card s8" style={{placeItems: "center", position:"relative"}}>
-             
-            <h>Tus planes</h>
-            <button className="savebutton" onClick={()=> setShowForm(!showForm)} >Nuevo plan</button>   
-            <ul className="listas"> 
-                {plans.map(pl=> <li key={pl.id} >
-                        <span> {pl.nombre} </span>
-                        <button style={{position:"absolute",right:40}} value={pl.id} onClick={()=>deletePlanButton(pl.id)} id="minibutton" >❌</button>
-                    </li>
+        <div style={{display:"flex",flexFlow:"row"}}>
+            <div className="card" style={{placeItems: "center", position:"relative", width: "500px"}}>
                 
-                )}             
-                    
-            </ul>
-        </div> 
-         
-        {showForm && (
-         <div className="modal-overlay">
-            <div className="form-container">
-                
-                <div className="card s8" style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
+                <h2>Tus planes</h2>
+                <button className="savebutton" onClick={()=> setShowForm(!showForm)} >Nuevo plan</button>   
+                <ul className="listas"> 
+                    {plans.map(pl=> <li key={pl.id} >
+                            <span> {pl.nombre} </span>
+                            <button style={{position:"absolute",right:40}} value={pl.id} onClick={()=>deletePlanButton(pl.id)} className="minibutton" >❌</button>
+                        </li>
+                    )}             
                         
-                        <h2>Nuevo plan<button  id="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>
-                        <form  onSubmit={updatePlan} style={{display:"grid", gap:12}}>
-                            
-                            <label>
-                            Tu plan
-                            <span className="card" style={{padding:"6px 10px"}}>
-                                <input
-                                value={nombre}
-                                onChange={(e)=>setNombre(e.target.value)}
-                                placeholder="¿Qué quieres hacer?"                          
-                                />
-                                </span>
-                            </label>
-                            <label>
-                            Interior o exterior *Opcional
-                            <span className="card" style={{padding:"6px 10px"}}>
-                                <select
-                                value={zona}
-                                onChange={(e)=>setZona(e.target.value)}>
-                                    {<option value="" disabled>-- Selecciona --</option>}
-                                    <option value="EX">Exterior</option>
-                                    <option value="IN">Interior</option>                            
-                                </select>                          
-                            
-                            </span>            
-                            </label>
-                            <label>
-                            Precio *Opcional
-                            <span className="card" style={{padding:"6px 10px"}}>
-                                <select
-                                value={precio}
-                                onChange={(e)=>setPrecio(e.target.value)} >
-                                    {<option value="" disabled>-- Selecciona --</option>}
-                                    <option value="BA">Barato</option>
-                                    <option value="ME">Medio</option>  
-                                    <option value="CA">Caro</option>                            
-                                </select>  
-                            </span>            
-                            </label>
-                            <label>
-                            ¿En qué provincia es? *Opcional
-                            <span className="card" style={{padding:"6px 10px"}}>
-                                <input
-                                value={provincia}
-                                onChange={(e)=>setProvincia(e.target.value)}
-                                placeholder="¿Será para ver el tiempo?"                          
-                                />
-                                </span>
-                            </label>
+                </ul>
+            </div> 
+        </div>
 
-                            {/*{error && <div style={{color:"crimson"}}>{error}</div>}
-                
-                            <button disabled={loading || !user || !password}>
-                            {loading ? "Entrando..." : "Entrar"}
-                            </button>*/}
-                            <span className="card" style={{padding:"6px 10px"}}>
-                                <button disabled={!nombre}>
-                                {!nombre ? "Falta el plan" : "Guardar"}
-                                </button>
-                            </span>
-                        </form>
-                
-                        </div>
-                </div>
+        {showForm && (
+         <div className="emergingFrame">            
+            <div className="card" style={{maxWidth: 420, margin: "40px auto", padding: 16}}>
+                    
+                    <h2>Nuevo plan<button  className="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>
+                    <form  onSubmit={updatePlan} style={{display:"grid", gap:12}}>
+                        
+                        <label>
+                        Tu plan
+                        <div style={{padding:"6px 10px"}}>
+                            <input
+                            value={nombre}
+                            onChange={(e)=>setNombre(e.target.value)}
+                            placeholder="¿Qué quieres hacer?"                          
+                            />
+                            </div>
+                        </label>
+                        <label>
+                        Interior o exterior *Opcional
+                        <div style={{padding:"6px 10px"}}>
+                            <select
+                            value={zona}
+                            onChange={(e)=>setZona(e.target.value)}>
+                                {<option value="" disabled>-- Selecciona --</option>}
+                                <option value="EX">Exterior</option>
+                                <option value="IN">Interior</option>                            
+                            </select>                          
+                        
+                        </div>            
+                        </label>
+                        <label>
+                        Precio *Opcional
+                        <div style={{padding:"6px 10px"}}>
+                            <select
+                            value={precio}
+                            onChange={(e)=>setPrecio(e.target.value)} >
+                                {<option value="" disabled>-- Selecciona --</option>}
+                                <option value="BA">Barato</option>
+                                <option value="ME">Medio</option>  
+                                <option value="CA">Caro</option>                            
+                            </select>  
+                        </div>            
+                        </label>
+                        <label>
+                        ¿En qué provincia es? *Opcional
+                        <div style={{padding:"6px 10px"}}>
+                            <input
+                            value={provincia}
+                            onChange={(e)=>setProvincia(e.target.value)}
+                            placeholder="¿Será para ver el tiempo?"                          
+                            />
+                            </div>
+                        </label>
+
+                        {/*{error && <div style={{color:"crimson"}}>{error}</div>}
+            
+                        <button disabled={loading || !user || !password}>
+                        {loading ? "Entrando..." : "Entrar"}
+                        </button>*/}
+                        <span style={{padding:"6px 10px"}}>
+                            <button disabled={!nombre}>
+                            {!nombre ? "Falta el plan" : "Guardar"}
+                            </button>
+                        </span>
+                    </form>
+            
+                    </div>
             </div>
+        
       )}
     </>
     )
