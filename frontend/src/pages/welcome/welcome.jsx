@@ -14,8 +14,12 @@ export default function Home(){
     const [plans, setPlans] = React.useState([]);
     const [days, setDays] = React.useState([]);
     const [firstDay, setFirstDay] = React.useState("Cargando…");
-     const [showForm, setShowForm] = React.useState(false);
+    const [showForm, setShowForm] = React.useState(false);
     const navigate = useNavigate();
+
+    function botonCalendario(day) {
+      
+    }
 
     function toISO(d) {
       const yyyy = d.getFullYear();
@@ -91,8 +95,32 @@ export default function Home(){
         </CalendarGrid>
         /*calendar ? <Calendario cal={calendar} /> : <p>Cargando…</p>*/}
       </div>
+        {showForm && (
+          <div className="emergingFrame">            
+            <div className="card" style={{maxWidth: 420, margin: "40px auto", padding: 16}}>                    
+              <h2>Nuevo plan<button  className="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>
+              <form  onSubmit={updatePlan} style={{display:"grid", gap:12}}> 
+                <h2>Dia<button  className="minibutton" onClick={()=> setShowForm(!showForm)}>❌</button></h2>                 
+                <label>
+                  Mañana
+                  <div style={{padding:"6px 10px"}}>
+                      <input
+                      value={provincia}
+                      onChange={(e)=>setProvincia(e.target.value)}
+                      placeholder="¿Será para ver el tiempo?"                          
+                      />
+                  </div>
+                </label>
+                  <span style={{padding:"6px 10px"}}>
+                    <button disabled={!nombre}>
+                      {!nombre ? "Falta el plan" : "Guardar"}
+                    </button>
+                  </span>
+                </form>
 
-        
+            </div>
+          </div>          
+        )}        
     </>);
 };
 

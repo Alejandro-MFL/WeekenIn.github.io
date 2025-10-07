@@ -129,12 +129,12 @@ export default function AllPlans() {
                         </label>
                         <label>
                         ¿En qué provincia es? *Opcional
-                        <div style={{padding:"6px 10px"}}>
-                            <input
-                            value={provincia}
-                            onChange={(e)=>setProvincia(e.target.value)}
-                            placeholder="¿Será para ver el tiempo?"                          
-                            />
+                            <div style={{padding:"6px 10px"}}>
+                                <input
+                                value={provincia}
+                                onChange={(e)=>setProvincia(e.target.value)}
+                                placeholder="¿Será para ver el tiempo?"                          
+                                />
                             </div>
                         </label>
 
